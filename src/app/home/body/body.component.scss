@@ -1,0 +1,17 @@
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  width: 150px;
+}
+
+.isLoggedIn {
+  color: red;
+  font-size: 12px;
+}
+
+.isLoggedOut {
+  color: yellow;
+}
