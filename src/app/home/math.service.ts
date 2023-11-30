@@ -5,8 +5,14 @@ import { Injectable } from "@angular/core";
 })
 export class MathService {
 
-  sum(a: number, b: number): number {
-    return a + b;
+  counter: number = 0;
+
+  getCounter(): number {
+    return this.counter;
+  }
+
+  add() {
+    this.counter++;
   }
 
   subtract(a: number, b: number): number {

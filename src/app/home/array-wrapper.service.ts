@@ -11,6 +11,7 @@ export class ArrayWrapperService {
     });
   }
 
+
   loopAndLogIndex(data: any[]): void {
     data.forEach((item, index) => {
       console.log("data :", item);

@@ -1,14 +1,23 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MathService } from '../math.service';
 
 @Component({
   selector: 'app-body',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './body.component.html',
-  styleUrl: './body.component.scss'
+  styleUrl: './body.component.scss',
+  providers: [MathService],
 })
 export class BodyComponent {
+
+  constructor(private mathService: MathService) {
+  }
+
+  onClick() {
+    console.log(this.mathService.getCounter())
+  }
 
   menuListItems: any[] = [
     {
