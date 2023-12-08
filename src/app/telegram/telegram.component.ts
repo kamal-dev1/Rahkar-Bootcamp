@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {TelegramService} from "./telegram-service.service"
 @Component({
   selector: 'app-telegram',
@@ -16,17 +16,62 @@ export class TelegramComponent {
     ) {}
   caht_id: number[] = [420955418, 75820215];
   ngOnInit(): void {
+    this.addItems()
+    // this.removeAt(0)
+    console.log(this.items);
+
     // this.sendMessage("سلام")
   }
   errorMessage:string|null = null;
   form:FormGroup=this.formBuilder.group({
-    text:["",Validators.required]
+    text:["",Validators.required],
+    items:this.formBuilder.array([])
   })
+
+
+  get items():FormArray{
+    return this.form.get('items') as FormArray;
+  }
+
+  addItems(){
+    this.items.push(this.formBuilder.group({
+      name:[""],
+      mobile:['']
+    }))
+  }
+
+  removeAt(index:number){
+    this.items.removeAt(index)
+  }
+
+  convertlistToTelegramFormat(list:any[]){
+    var arrayOfTelegramFormat:any=[]
+    // [
+    //   [{text:"",callback_data:""},{text:"",callback_data:""}],
+    //   [{text:"",callback_data:""},{text:"",callback_data:""}]
+    // ]
+    list.forEach((element,i) => {
+      arrayOfTelegramFormat.push(
+        [
+          {text:element.name,callback_data:element.name}
+        ]
+      )
+
+    });
+    return arrayOfTelegramFormat
+
+  }
+
   submite(){
     this.errorMessage=null
     if (this.form.valid) {
+
+
+
         this.telegramService.sendMessage(
-          this.caht_id[0],this.form.get('text')?.value
+          this.caht_id[0],
+          this.form.get('text')?.value,
+          this.convertlistToTelegramFormat(this.items.value)
           ).subscribe(data=>{
 
         })
@@ -37,6 +82,20 @@ export class TelegramComponent {
 
       }
   }
+  // [
+  //   [{"text":"asdasd",calback_data:"sdfsdf"},{"text":"asdasd",calback_data:"sdfsdf"}]
+  // ]
+  // [
+  //   {
+  //     "name": "دکمه 1"
+  //   },
+  //   {
+  //     "name": "دکمه 2"
+  //   },
+  //   {
+  //     "name": "دکمه 3"
+  //   }
+  // ]
   // name="1"
   // text=`hgdfj${this.name}hgdgh`
   // sendMessage(text: string) {
