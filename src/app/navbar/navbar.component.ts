@@ -20,7 +20,7 @@ export class NavbarComponent {
     },
     {
       title: 'Body',
-      link: 'home/body',
+      link: 'get/api',
     },
     {
       title: 'Header',

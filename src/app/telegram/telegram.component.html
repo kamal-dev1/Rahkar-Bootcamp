@@ -1,0 +1,21 @@
+<div class="container">
+  <ng-container *ngIf="errorMessage">
+    <div class="row my-5">
+      <div class="col-12">
+        <span class="alert bg-danger text-white">{{ errorMessage }}</span>
+      </div>
+    </div>
+
+  </ng-container>
+
+
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-lg-4 col-12">
+        <input type="text" formControlName="text" class="form-control" placeholder="متن ارسالی برای تلگرام">
+      </div>
+    </div>
+    <button (click)="submite()" type="submit" class="btn btn-success mt-5">ارسال پیام</button>
+  </form>
+
+</div>

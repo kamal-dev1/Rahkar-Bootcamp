@@ -16,7 +16,11 @@ constructor(private authService: AuthService){
 }
 
 login(){
-  this.isLogin = this.authService.login("admin", "1234")
-  console.log(this.isLogin)
+  // console.log("sad")
+  //  this.authService.login("admin", "1234").subscribe(data => {
+  //    console.log("sad",data)
+  //  })
+  this.authService.isLoggedIn = true;
+  console.log(this.authService.isLoggedIn);
 }
 }
