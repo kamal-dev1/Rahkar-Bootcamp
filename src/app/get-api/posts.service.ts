@@ -17,4 +17,8 @@ export class PostService {
   createNewPost(body: any): Observable<any> {
     return this.http.post("https://jsonplaceholder.typicode.com/posts", body);
   }
+  getMyServerData(): Observable<any> {
+
+    return this.http.get("http://localhost:4000/sala")
+  }
 }

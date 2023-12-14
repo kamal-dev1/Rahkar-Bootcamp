@@ -5,6 +5,7 @@ import { GetApiComponent } from "./get-api/get-api.component";
 import { PostFormComponent } from "./get-api/post-form/post-form.component";
 import { AuthGuard } from "./auth.guard";
 import { TelegramComponent } from "./telegram/telegram.component";
+import { GetServerDataComponent } from "./get-api/get-server-data/get-server-data.component";
 
 
 export const routes: Routes = [
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path: "get/api",
     component: GetApiComponent,
+  },
+  {
+    path: "get/api/server",
+    component: GetServerDataComponent,
   },
   {
     path: "post/form",
