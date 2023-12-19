@@ -36,28 +36,46 @@ export class TelegramComponent {
   addItems(){
     this.items.push(this.formBuilder.group({
       name:[""],
-      mobile:['']
+      // mobile:['']
     }))
   }
 
   removeAt(index:number){
     this.items.removeAt(index)
   }
-
+  colNumber:number=4
   convertlistToTelegramFormat(list:any[]){
-    var arrayOfTelegramFormat:any=[]
-    // [
-    //   [{text:"",callback_data:""},{text:"",callback_data:""}],
-    //   [{text:"",callback_data:""},{text:"",callback_data:""}]
-    // ]
-    list.forEach((element,i) => {
-      arrayOfTelegramFormat.push(
-        [
-          {text:element.name,callback_data:element.name}
-        ]
-      )
+    var arrayOfTelegramFormat:any=  []
+     var rowNumber=Math.ceil(list.length/this.colNumber)
+     for(let i=0;i<rowNumber;i++){
+      let arrayRow=[];
 
-    });
+      for(let j=0;j<this.colNumber;j++){
+        let keyIndex=(i*2)+j
+        if(typeof list[keyIndex] !== 'undefined'){
+          arrayRow.push({text:list[keyIndex].name,callback_data:""})
+        }
+
+      }
+      arrayOfTelegramFormat.push(arrayRow)
+     }
+
+    //  [
+    //   [{},{}],
+    //   [{},{},{}]
+    //  ]
+    // [{text:"wer",callback_data:""},{text:"ert",callback_data:""},{text:"ert",callback_data:""}],
+    // [{text:"ert",callback_data:""}]
+
+
+    // list.forEach((element,i) => {
+    //   arrayOfTelegramFormat.push(
+    //     [
+    //       {text:element.name,callback_data:element.name}
+    //     ]
+    //   )
+
+    // });
     return arrayOfTelegramFormat
 
   }

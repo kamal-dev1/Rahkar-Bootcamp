@@ -1,77 +1,58 @@
-
-// const http=require('http')
-// const PORT=3000;
-// const server= http.createServer((req,res)=>{
-//     res.statusCode=200;
-//     res.setHeader('Content-Type', 'application/json')
-//     var data={
-//         meassege:"salaaaaaam bootcamps",
-//         name:"kamal",
-//         mobile:"56456"
-//     }
-//     res.end(JSON.stringify(data))
-// })
-
-
-// server.listen(4000,()=>{
-//     console.log("is ok");
-// })
-
-
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const bookRoutes = require('./routes/bookRouter');
 const { ErrorHandler, Logger } = require('./error');
 const app = express();
 
 let users = [
-    {
-        id: 1,
-        name: "Alireza",
-        books: [],
-    },
-    {
-        id: 2,
-        name: "Kamal",
-        books: [],
-    }
+  {
+    id: 1,
+    name: "Alireza",
+    books: [],
+  },
+  {
+    id: 2,
+    name: "Kamal",
+    books: [],
+  }
 ];
 
 app.use(cors());
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.get('/username',[Logger] ,(req, res, next) => {
-    const { id } = req.query;
-    let findedUser = users.find((user) => user.id == id);
-    if (!findedUser) ErrorHandler("User not found", res, next);
+app.use("/api/book", bookRoutes);
 
-    res.json({
-        name: findedUser.name
-    });
-});
+// app.get('/username',[Logger] ,(req, res, next) => {
+//     const { id } = req.query;
+//     let findedUser = users.find((user) => user.id == id);
+//     if (!findedUser) ErrorHandler("User not found", res, next);
 
-app.get('/books/:id', (req, res, next) => {
-    const { id } = req.params;
-    let findedUser = users.find((user) => user.id == id);
-    if (!findedUser) ErrorHandler("User not found", res, next);
+//     res.json({
+//         name: findedUser.name
+//     });
+// });
 
-    res.json({
-        books: findedUser.books,
-    });
-});
+// app.get('/books/:id', (req, res, next) => {
+//     const { id } = req.params;
+//     let findedUser = users.find((user) => user.id == id);
+//     if (!findedUser) ErrorHandler("User not found", res, next);
 
-app.post('/book/:id', (req, res, next) => {
-    const { id } = req.params;
-    let findedUser = users.find((user) => user.id == id);
-    if (!findedUser) ErrorHandler("User not found", res, next);
+//     res.json({
+//         books: findedUser.books,
+//     });
+// });
 
-    findedUser.books.push(req.body)
+// app.post('/book/:id', (req, res, next) => {
+//     const { id } = req.params;
+//     let findedUser = users.find((user) => user.id == id);
+//     if (!findedUser) ErrorHandler("User not found", res, next);
 
-    res.json(findedUser);
-});
+//     findedUser.books.push(req.body)
 
+//     res.json(findedUser);
+// });
 
 app.listen(4000, ()=>{
-    console.log("is ok");
+  console.log("Server listening on port 4000");
 });
