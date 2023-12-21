@@ -11,8 +11,9 @@ let users = [
   }
 ];
 
-exports.GetBooks = (req, res, next) => {
-  const { id } = req.params;
+exports.GetBooks = (req, res) => {
+  const {id} = req.params;
+
   let findedUser = users.find((user) => user.id == id);
   if (!findedUser) ErrorHandler("User not found", res, next);
 

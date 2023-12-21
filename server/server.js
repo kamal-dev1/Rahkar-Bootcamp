@@ -1,36 +1,50 @@
 const express = require('express');
 const cors = require('cors');
 const bookRoutes = require('./routes/bookRouter');
+const userRoutes = require('./routes/userRouter');
 const { ErrorHandler, Logger } = require('./error');
 const app = express();
-
-let users = [
-  {
-    id: 1,
-    name: "Alireza",
-    books: [],
-  },
-  {
-    id: 2,
-    name: "Kamal",
-    books: [],
-  }
-];
-
 app.use(cors());
-
 app.use(express.json());
 
-app.use("/api/book", bookRoutes);
 
-// app.get('/username',[Logger] ,(req, res, next) => {
-//     const { id } = req.query;
+// let users = [
+//   {
+//     id: 1,
+//     name: "Alireza",
+//     books: [],
+//   },
+//   {
+//     id:2,
+//     name:"hamid",
+//     books:[]
+//   },
+//   {
+//     id: 2,
+//     name: "Kamal",
+//     books: [],
+//   },
+
+// ];
+
+// -controllers
+// -models
+// -routes
+
+
+// localhost:4000/api/book
+app.use("/api/user", userRoutes);
+app.use("/api/book", bookRoutes);
+//http://localhost:4000/username
+// app.post('/username',[Logger] ,(req, res, next) => {
+//     const { id } = req.body;
 //     let findedUser = users.find((user) => user.id == id);
+
 //     if (!findedUser) ErrorHandler("User not found", res, next);
 
-//     res.json({
-//         name: findedUser.name
-//     });
+//     res.json(
+//       findedUser
+//     );
 // });
 
 // app.get('/books/:id', (req, res, next) => {
