@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const { GetUsers, GetUserById, AddUser } = require("../controllers/userController");
 
-
-const { GetUsers, getUsersByFilter } = require("../controllers/userController");
-
-router.get("/",GetUsers);
-router.get("/:name",getUsersByFilter);
+router.get("/", GetUsers)
+      .get("/:id", GetUserById)
+      .post("/", AddUser);
 
 module.exports = router;

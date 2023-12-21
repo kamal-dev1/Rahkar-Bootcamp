@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const bookRoutes = require('./routes/bookRouter');
 const userRoutes = require('./routes/userRouter');
-const { ErrorHandler, Logger } = require('./error');
 const app = express();
 app.use(cors());
 app.use(express.json());
